@@ -2,6 +2,7 @@
   "name": "acadex",
   "version": "1.0.0",
   "description": "Know Your Course, Before It Begins",
+  "author": "ACADEX Team <acadex@example.com>",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
