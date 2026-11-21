@@ -264,13 +264,17 @@
         statusText.textContent = Object.keys(parsed).length ? "Loaded saved ticks for today" : "Not saved yet today";
       }
 
-      function saveChecklistForToday() {
+     function saveChecklistForToday() {
         const activeKey = getTodayStorageKey();
         cleanupOldKeys(activeKey);
         updateDateBadge();
         const stateMap = collectCurrentState();
         localStorage.setItem(activeKey, JSON.stringify(stateMap));
         statusText.textContent = "Saved for today!";
+
+        setTimeout(() => {
+          window.close();
+        }, 120);
       }
 
       function scheduleMidnightReset() {
