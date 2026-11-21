@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACADEX - Know Your Course, Before It Begins</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-brand">
+      <h1>ACADEX</h1>
+      <p>KNOW YOUR COURSE, BEFORE IT BEGINS</p>
+    </div>
+    <button type="button" id="checklistBtn" class="checklist-btn">
+      Pre-Semester Checklist (Child Window)
+    </button>
+  </header>
+
+  <main class="main-layout">
+    <section class="card form-panel">
+      <h2>Share Course Experience (For Juniors)</h2>
+
+      <form id="courseForm">
+        <div class="form-group">
+          <label for="semester">Target Semester</label>
+          <select id="semester" required>
+            <option value="Semester 1">Semester 1</option>
+            <option value="Semester 2">Semester 2</option>
+            <option value="Semester 3">Semester 3</option>
+            <option value="Semester 4">Semester 4</option>
+            <option value="Semester 5">Semester 5</option>
+            <option value="Semester 6">Semester 6</option>
+            <option value="Semester 7">Semester 7</option>
+            <option value="Semester 8">Semester 8</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="course">Course Code &amp; Title</label>
+          <input
+            type="text"
+            id="course"
+            placeholder="e.g., CSE 2100 - Software Development Lab"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="learned">What I Learned (Key Takeaways)</label>
+          <textarea
+            id="learned"
+            rows="3"
+            placeholder="Briefly write the core concepts taught in this course..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="futureHelp">How &amp; Where It Helps in Future Courses</label>
+          <textarea
+            id="futureHelp"
+            rows="3"
+            placeholder="Which upcoming courses or projects depend on this course?"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="tip">Pre-Semester Preparation Tip</label>
+          <input
+            type="text"
+            id="tip"
+            placeholder="e.g., Learn basic HTML, CSS &amp; JS before class"
+            required
+          />
+        </div>
+
+        <button type="submit" class="primary-btn">Save Course Insight</button>
+      </form>
+    </section>
+
+    <section class="card roadmap-panel">
+      <div class="roadmap-header">
+        <h2>Upcoming Semester Roadmap</h2>
+        <select id="semesterFilter">
+          <option value="All Semesters">All Semesters</option>
+          <option value="Semester 1">Semester 1</option>
+          <option value="Semester 2">Semester 2</option>
+          <option value="Semester 3">Semester 3</option>
+          <option value="Semester 4">Semester 4</option>
+          <option value="Semester 5">Semester 5</option>
+          <option value="Semester 6">Semester 6</option>
+          <option value="Semester 7">Semester 7</option>
+          <option value="Semester 8">Semester 8</option>
+        </select>
+      </div>
+
+      <div id="insightsList" class="insights-list"></div>
+    </section>
+  </main>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

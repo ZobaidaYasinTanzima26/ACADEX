@@ -1,0 +1,42 @@
+{
+  "name": "acadex",
+  "version": "1.0.0",
+  "description": "Know Your Course, Before It Begins",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win --x64",
+    "build:linux": "electron-builder --linux deb AppImage",
+    "build:mac": "electron-builder --mac dmg"
+  },
+  "devDependencies": {
+    "electron": "33.4.11",
+    "electron-builder": "^26.10.0"
+  },
+  "build": {
+    "appId": "com.acadex.desktop",
+    "productName": "Acadex",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "dir"
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Education"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.education"
+    }
+  }
+}

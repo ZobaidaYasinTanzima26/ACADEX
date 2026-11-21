@@ -1,0 +1,50 @@
+name: Cross-Platform Build (Win, Linux, macOS)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            platform: win
+            cmd: npx electron-builder --win --x64
+          - os: ubuntu-latest
+            platform: linux
+            cmd: npx electron-builder --linux deb AppImage
+          - os: macos-latest
+            platform: mac
+            cmd: npx electron-builder --mac dmg
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application bundle
+        run: ${{ matrix.cmd }}
+
+      - name: Upload built bundles
+        uses: actions/upload-artifact@v4
+        with:
+          name: Acadex-${{ matrix.platform }}-bundle
+          path: |
+            dist/*.exe
+            dist/*.deb
+            dist/*.AppImage
+            dist/*.dmg
+          if-no-files-found: warn
