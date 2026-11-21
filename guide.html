@@ -3,50 +3,301 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pre-Semester Checklist</title>
+  <title>ACADEX - Pre-Semester Checklist</title>
   <style>
-<script> ... </script>
-    body {
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7f9;
+    }
+
+    body {
+      background-color: #f4f7f6;
       color: #1f2937;
       padding: 24px;
-      line-height: 1.6;
     }
-    h1 {
-      font-size: 20px;
-      color: #0f766e;
-      margin-bottom: 12px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
+
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
       background: #ffffff;
-      padding: 12px 14px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .header {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      color: #115e59;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .date-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f766e;
+      background: #ccfbf1;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .checklist {
+      list-style: none;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 10px;
     }
-    input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
+
+    .checklist-item label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .checklist-item label:hover {
+      background-color: #f9fafb;
+      border-color: #cbd5e1;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #0f766e;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checklist-item input[type="checkbox"]:checked + span {
+      text-decoration: line-through;
+      color: #6b7280;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .save-btn {
+      background-color: #0f766e;
+      color: #ffffff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      background-color: #115e59;
+    }
+
+    .reset-btn {
+      background-color: #ef4444;
+      color: #ffffff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .reset-btn:hover {
+      background-color: #dc2626;
+    }
+
+    .status-text {
+      font-size: 12px;
+      color: #059669;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
-  <h1>Pre-Semester Preparation Checklist</h1>
-  <ul>
-    <li><input type="checkbox" /> <span>Review course syllabus and credit structure</span></li>
-    <li><input type="checkbox" /> <span>Check prerequisite topics from previous semesters</span></li>
-    <li><input type="checkbox" /> <span>Set up required tools, compilers, or software</span></li>
-    <li><input type="checkbox" /> <span>Collect reference books and lab guidelines</span></li>
-    <li><input type="checkbox" /> <span>Plan weekly study and lab practice hours</span></li>
-  </ul>
+  <div class="container">
+    <div class="header">
+      <h1>Pre-Semester Preparation Checklist</h1>
+      <p>Tick items and click Save to keep them for today; resets at 12:00 AM.</p>
+      <div id="todayDateBadge" class="date-badge"></div>
+    </div>
+
+    <ul class="checklist" id="checklistContainer">
+      <li class="checklist-item">
+        <label>
+          <input type="checkbox" id="chk_syllabus" />
+          <span>Review course syllabus and credit structure</span>
+        </label>
+      </li>
+      <li class="checklist-item">
+        <label>
+          <input type="checkbox" id="chk_prerequisites" />
+          <span>Check prerequisite topics from previous semesters</span>
+        </label>
+      </li>
+      <li class="checklist-item">
+        <label>
+          <input type="checkbox" id="chk_tools" />
+          <span>Set up required tools, compilers, or software</span>
+        </label>
+      </li>
+      <li class="checklist-item">
+        <label>
+          <input type="checkbox" id="chk_books" />
+          <span>Collect reference books and lab guidelines</span>
+        </label>
+      </li>
+      <li class="checklist-item">
+        <label>
+          <input type="checkbox" id="chk_routine" />
+          <span>Plan weekly study and lab practice hours</span>
+        </label>
+      </li>
+    </ul>
+
+    <div class="actions">
+      <div class="btn-group">
+        <button type="button" id="saveChecklistBtn" class="save-btn">Save Checklist</button>
+        <button type="button" id="clearTodayBtn" class="reset-btn">Clear Today's Ticks</button>
+      </div>
+      <span id="saveStatus" class="status-text">Ready</span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_PREFIX = "acadex_daily_checklist_";
+      const checkboxes = Array.from(document.querySelectorAll('#checklistContainer input[type="checkbox"]'));
+      const dateBadge = document.getElementById("todayDateBadge");
+      const statusText = document.getElementById("saveStatus");
+      const saveBtn = document.getElementById("saveChecklistBtn");
+      const clearTodayBtn = document.getElementById("clearTodayBtn");
+
+      function formatDateKey(dateObj) {
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+        const day = String(dateObj.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function getTodayStorageKey() {
+        return `${STORAGE_PREFIX}${formatDateKey(new Date())}`;
+      }
+
+      function updateDateBadge() {
+        const now = new Date();
+        const formatted = now.toLocaleDateString("en-GB", {
+          weekday: "short",
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        });
+        dateBadge.textContent = `Active Date: ${formatted}`;
+      }
+
+      function cleanupOldKeys(activeKey) {
+        Object.keys(localStorage).forEach((key) => {
+          if (key.startsWith(STORAGE_PREFIX) && key !== activeKey) {
+            localStorage.removeItem(key);
+          }
+        });
+      }
+
+      function applyStateToCheckboxes(stateMap) {
+        checkboxes.forEach((cb, idx) => {
+          const id = cb.id || `item_${idx}`;
+          cb.checked = Boolean(stateMap[id]);
+        });
+      }
+
+      function collectCurrentState() {
+        const stateMap = {};
+        checkboxes.forEach((cb, idx) => {
+          const id = cb.id || `item_${idx}`;
+          stateMap[id] = cb.checked;
+        });
+        return stateMap;
+      }
+
+      function loadChecklistForToday() {
+        const activeKey = getTodayStorageKey();
+        cleanupOldKeys(activeKey);
+        updateDateBadge();
+
+        let parsed = {};
+        try {
+          parsed = JSON.parse(localStorage.getItem(activeKey) || "{}");
+        } catch (err) {
+          parsed = {};
+        }
+
+        applyStateToCheckboxes(parsed);
+        statusText.textContent = Object.keys(parsed).length ? "Loaded saved ticks for today" : "Not saved yet today";
+      }
+
+      function saveChecklistForToday() {
+        const activeKey = getTodayStorageKey();
+        cleanupOldKeys(activeKey);
+        updateDateBadge();
+        const stateMap = collectCurrentState();
+        localStorage.setItem(activeKey, JSON.stringify(stateMap));
+        statusText.textContent = "Saved for today!";
+      }
+
+      function scheduleMidnightReset() {
+        const now = new Date();
+        const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 50);
+        const msUntilMidnight = nextMidnight.getTime() - now.getTime();
+
+        setTimeout(() => {
+          loadChecklistForToday();
+          scheduleMidnightReset();
+        }, Math.max(msUntilMidnight, 1000));
+      }
+
+      saveBtn.addEventListener("click", saveChecklistForToday);
+
+      clearTodayBtn.addEventListener("click", () => {
+        const activeKey = getTodayStorageKey();
+        localStorage.removeItem(activeKey);
+        applyStateToCheckboxes({});
+        statusText.textContent = "Cleared for today";
+      });
+
+      window.addEventListener("focus", loadChecklistForToday);
+
+      loadChecklistForToday();
+      scheduleMidnightReset();
+    })();
+  </script>
 </body>
 </html>
