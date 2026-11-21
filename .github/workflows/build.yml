@@ -13,13 +13,13 @@ jobs:
         include:
           - os: windows-latest
             platform: win
-            cmd: npx electron-builder --win --x64
+            cmd: npx electron-builder --win --x64 --publish never
           - os: ubuntu-latest
             platform: linux
-            cmd: npx electron-builder --linux deb AppImage
+            cmd: npx electron-builder --linux deb AppImage --publish never
           - os: macos-latest
             platform: mac
-            cmd: npx electron-builder --mac dmg
+            cmd: npx electron-builder --mac dmg --publish never
 
     runs-on: ${{ matrix.os }}
 
